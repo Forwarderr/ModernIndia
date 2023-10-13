@@ -67,7 +67,7 @@ max_end_years = filtered_data.groupby('Sole')['Finish'].max().reset_index()
 filtered_data = filtered_data.merge(max_end_years, on='Sole', suffixes=('', '_max'))
 
 # Create the Gantt chart with bars for events with day range and diamond symbols for milestones
-bars = alt.Chart(filtered_data).mark_bar().transform_filter(
+bars = alt.Chart(filtered_data).mark_bar(size = 6).transform_filter(
     alt.datum.IsMilestone == False
 ).encode(
     x=alt.X('Start:T', title='Time', axis=alt.Axis(format='%d-%B-%Y')),
@@ -105,7 +105,5 @@ combined_chart = (bars + diamonds)
 combined_chart = combined_chart.configure_axis(
     labelFontSize=12,
 )
-
-
 
 st.altair_chart(combined_chart, use_container_width=True)
