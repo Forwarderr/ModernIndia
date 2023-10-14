@@ -67,7 +67,7 @@ max_end_years = filtered_data.groupby('Sole')['Finish'].max().reset_index()
 filtered_data = filtered_data.merge(max_end_years, on='Sole', suffixes=('', '_max'))
 
 # Create the Gantt chart with bars for events with day range and diamond symbols for milestones
-bars = alt.Chart(filtered_data).mark_bar(size = 6).transform_filter(
+bars = alt.Chart(filtered_data).mark_bar(size = 4).transform_filter(
     alt.datum.IsMilestone == False
 ).encode(
     x=alt.X('Start:T', title='Time', axis=alt.Axis(format='%d-%B-%Y')),
@@ -85,7 +85,7 @@ bars = alt.Chart(filtered_data).mark_bar(size = 6).transform_filter(
     width=900
 ).interactive()
 
-diamonds = alt.Chart(filtered_data).mark_point(shape='diamond', filled=True, size=300).transform_filter(
+diamonds = alt.Chart(filtered_data).mark_point(shape='diamond', filled=True, size=350).transform_filter(
     alt.datum.IsMilestone == True
 ).encode(
     x=alt.X('Start:T', axis=alt.Axis(format='%d-%B-%Y')),
